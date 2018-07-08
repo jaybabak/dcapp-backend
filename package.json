@@ -1,0 +1,19 @@
+{
+  "name": "nodemongoexpress",
+  "version": "1.0.0",
+  "description": "Node/Mongoose/Express Back-end",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jaybabak/dcapp-backend.git"
+  },
+  "author": "Sami Malik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaybabak/dcapp-backend/issues"
+  },
+  "homepage": "https://github.com/jaybabak/dcapp-backend#readme"
+}
