@@ -1,17 +1,16 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
-var mongoose = require('mongoose');
-require('./models/index').connect();
 
-
-
+const mongoose = require('mongoose');
+const db = require('./models/index')
+db.connect(); //make connection to Database
 const User = mongoose.model('User');
 
-//====ROOT DIRECTORY===//
 
+//====ADD USER END POINT===//
 
-app.get('/:name', function(req, res) {
+app.get('/add/:name', function(req, res) {
 
   console.log(req.params.name);
 
@@ -25,7 +24,7 @@ app.get('/:name', function(req, res) {
 
   person.save((err) => {
 
-     if (err) return handleError(err);
+     if (err) return console.error(err);
 
      console.info('Saved:' + '\n');
      console.info(testUser);
@@ -39,11 +38,13 @@ app.get('/:name', function(req, res) {
 
 });
 
+//====GET ALL USERS END POINT===//
+
 app.get('/users', function(req, res) {
 
   User.find({}, function(err, docs){
 
-    if (err) return handleError(err);
+    if (err) return console.error(err);
 
     console.info("Returning all items:\n");
     console.info(docs);
