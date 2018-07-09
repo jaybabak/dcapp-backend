@@ -1,12 +1,20 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
+const bodyParser = require('body-parser');
+const passport = require('passport');
 
+//DATABASE
 const mongoose = require('mongoose');
 const db = require('./models/index')
 db.connect(); //make connection to Database
 const User = mongoose.model('User');
 
+//AUTHENTICATION
+app.use(passport.initialize());
+
+//TELL APP TO PARSE
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //====ADD USER END POINT===//
 
