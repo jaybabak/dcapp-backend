@@ -18,9 +18,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // load passport strategies
 const localSignupStrategy = require('./passport/local-signup');
-// const localLoginStrategy = require('./passport/local-login');
+const localLoginStrategy = require('./passport/local-login');
 passport.use('local-signup', localSignupStrategy);
-// passport.use('local-login', localLoginStrategy);
+passport.use('local-login', localLoginStrategy);
+
+
+// routes
+const authRoutes = require('./routes/auth');
+const apiRoutes = require('./routes/api');
+app.use('/auth', authRoutes);
+app.use('/api', apiRoutes);
 
 //====ADD USER END POINT===//
 
@@ -30,13 +37,13 @@ app.get('/add/:name', function(req, res) {
 
   const testUser =  {
     email: req.params.name + Math.round(Math.random()*10) + '@test.com',
-    name: req.params.name + ' Robot ID: ' + Math.round(Math.random()*10),
+    name: req.params.name + '' + Math.round(Math.random()*10),
     password: '123456'
   }
 
-  var person = new User(testUser);
+  var Person = new User(testUser);
 
-  person.save((err) => {
+  Person.save((err) => {
 
      if (err) return console.error(err);
 
