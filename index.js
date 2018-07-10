@@ -16,6 +16,12 @@ app.use(passport.initialize());
 //TELL APP TO PARSE
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// load passport strategies
+const localSignupStrategy = require('./passport/local-signup');
+// const localLoginStrategy = require('./passport/local-login');
+passport.use('local-signup', localSignupStrategy);
+// passport.use('local-login', localLoginStrategy);
+
 //====ADD USER END POINT===//
 
 app.get('/add/:name', function(req, res) {
@@ -24,7 +30,7 @@ app.get('/add/:name', function(req, res) {
 
   const testUser =  {
     email: req.params.name + Math.round(Math.random()*10) + '@test.com',
-    name: req.params.name + 'Robot ID: ' + Math.round(Math.random()*10),
+    name: req.params.name + ' Robot ID: ' + Math.round(Math.random()*10),
     password: '123456'
   }
 
