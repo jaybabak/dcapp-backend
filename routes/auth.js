@@ -118,6 +118,9 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
   const validationResult = validateLoginForm(req.body);
+  console.log(validationResult);
+  console.log(req);
+
   if (!validationResult.success) {
     return res.status(400).json({
       success: false,
