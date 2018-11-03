@@ -29,35 +29,6 @@ const apiRoutes = require('./routes/api');
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 
-//====ADD USER END POINT===//
-
-app.get('/add/:name', function(req, res) {
-
-  console.log(req.params.name);
-
-  const testUser =  {
-    email: req.params.name + Math.round(Math.random()*10) + '@test.com',
-    name: req.params.name + '' + Math.round(Math.random()*10),
-    password: '123456'
-  }
-
-  var Person = new User(testUser);
-
-  Person.save((err) => {
-
-     if (err) return console.error(err);
-
-     console.info('Saved:' + '\n');
-     console.info(testUser);
-
-     res.json({
-       testUser
-     });
-
-
-  });
-
-});
 
 //====GET ALL USERS END POINT===//
 
@@ -75,8 +46,6 @@ app.get('/users', function(req, res) {
 
     res.json(results);
   });
-
-
 
 });
 

@@ -15,19 +15,30 @@ function validateSignupForm(payload) {
   let isFormValid = true;
   let message = '';
 
+  console.log(payload);
+
   if (!payload || typeof payload.email !== 'string' || !validator.isEmail(payload.email)) {
     isFormValid = false;
     errors.email = 'Please provide a correct email address.';
+    errors.emailValid = true;
   }
 
   if (!payload || typeof payload.password !== 'string' || payload.password.trim().length < 8) {
     isFormValid = false;
     errors.password = 'Password must have at least 8 characters.';
+    errors.passwordValid = true;
   }
 
   if (!payload || typeof payload.name !== 'string' || payload.name.trim().length === 0) {
     isFormValid = false;
     errors.name = 'Please provide your name.';
+    errors.nameValid = true;
+  }
+
+  if (!payload || typeof payload.lastName !== 'string' || payload.lastName.trim().length === 0) {
+    isFormValid = false;
+    errors.lastName = 'Please provide a last name.';
+    errors.lastNameValid = true;
   }
 
   if (!isFormValid) {

@@ -1,12 +1,12 @@
 var mongoose = require('mongoose');
-// const dbUri = 'mongodb://localhost:27017/dcapp';
-const dbUri = 'mongodb://phot0x:welcomesm14@ds217131.mlab.com:17131/dcapp';
+const dbUri = 'mongodb://localhost:27017/dcapp';
+// const dbUri = 'mongodb://phot0x:welcomesm14@ds217131.mlab.com:17131/dcapp';
 
 module.exports.connect = () => {
 
 
 
-  mongoose.connect('mongodb://phot0x:welcomesm14@ds217131.mlab.com:17131/dcapp', { useNewUrlParser: true });
+  mongoose.connect(dbUri, { useNewUrlParser: true });
 
   mongoose.Promise = global.Promise;
 
