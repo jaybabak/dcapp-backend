@@ -17,29 +17,40 @@ function validateSignupForm(payload) {
 
   console.log(payload);
 
+  //Email
   if (!payload || typeof payload.email !== 'string' || !validator.isEmail(payload.email)) {
     isFormValid = false;
     errors.email = 'Please provide a correct email address.';
-    errors.emailValid = true;
+    errors.emailInvalid = true;
   }
 
+  //Password
   if (!payload || typeof payload.password !== 'string' || payload.password.trim().length < 8) {
     isFormValid = false;
     errors.password = 'Password must have at least 8 characters.';
-    errors.passwordValid = true;
+    errors.passwordInvalid = true;
   }
 
+  //Name
   if (!payload || typeof payload.name !== 'string' || payload.name.trim().length === 0) {
     isFormValid = false;
     errors.name = 'Please provide your name.';
-    errors.nameValid = true;
+    errors.nameInvalid = true;
   }
 
+  // Last Name
   if (!payload || typeof payload.lastName !== 'string' || payload.lastName.trim().length === 0) {
     isFormValid = false;
     errors.lastName = 'Please provide a last name.';
-    errors.lastNameValid = true;
+    errors.lastNameInvalid = true;
   }
+
+  //Address name
+  // if (!payload || typeof payload.lastName !== 'string' || payload.lastName.trim().length === 0) {
+  //   isFormValid = false;
+  //   errors.lastName = 'Please provide a last name.';
+  //   errors.lastNameInvalid = true;
+  // }
 
   if (!isFormValid) {
     message = 'Check the form for errors.';
@@ -109,7 +120,8 @@ router.post('/signup', (req, res, next) => {
           success: false,
           message: 'Check the form for errors.',
           errors: {
-            email: 'This email is already taken.'
+            email: 'This email is already taken.',
+            emailInvalid: true
           }
         });
       }
@@ -129,8 +141,8 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
   const validationResult = validateLoginForm(req.body);
-  console.log(validationResult);
-  console.log(req);
+  // console.log(validationResult);
+  // console.log(req);
 
   if (!validationResult.success) {
     return res.status(400).json({

@@ -10,6 +10,18 @@ const UserSchema = new mongoose.Schema({
   password: String,
   name: String,
   lastName: String,
+  mobileNumber: String,
+  address: {
+    addressName: String,
+    addressType: String,
+    street: String,
+    buildingName: String,
+    floor: String,
+    additionalDirections: String,
+    lat: String,
+    long: String,
+    preferredAddress: String,
+  }
 });
 
 
