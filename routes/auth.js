@@ -15,7 +15,7 @@ function validateSignupForm(payload) {
   let isFormValid = true;
   let message = '';
 
-  console.log(payload);
+  // console.log(payload);
 
   //Email
   if (!payload || typeof payload.email !== 'string' || !validator.isEmail(payload.email)) {
@@ -46,11 +46,53 @@ function validateSignupForm(payload) {
   }
 
   //Address name
-  // if (!payload || typeof payload.lastName !== 'string' || payload.lastName.trim().length === 0) {
-  //   isFormValid = false;
-  //   errors.lastName = 'Please provide a last name.';
-  //   errors.lastNameInvalid = true;
-  // }
+  if (!payload || typeof payload.addressName !== 'string' || payload.addressName.trim().length === 0) {
+    isFormValid = false;
+    errors.addressName = 'Please provide a valid address name.';
+    errors.addressNameInvalid = true;
+  }
+
+  //Address type
+  if (!payload || typeof payload.addressType !== 'string' || payload.addressType.trim().length === 0) {
+    isFormValid = false;
+    errors.addressType = 'Please select an address type e.g: home or office.';
+    errors.addressTypeInvalid = true;
+  }
+
+  //Street
+  if (!payload || typeof payload.street !== 'string' || payload.street.trim().length === 0) {
+    isFormValid = false;
+    errors.street = 'Please enter a valid street.';
+    errors.streetInvalid = true;
+  }
+
+  //Building name
+  if (!payload || typeof payload.buildingName !== 'string' || payload.buildingName.trim().length === 0) {
+    isFormValid = false;
+    errors.buildingName = 'Please enter a valid street.';
+    errors.buildingNameInvalid = true;
+  }
+
+  //Floor
+  if (!payload || typeof payload.floor !== 'string' || payload.floor.trim().length === 0) {
+    isFormValid = false;
+    errors.floor = 'Please enter a valid street.';
+    errors.floorInvalid = true;
+  }
+
+  //Additional Directions
+  if (!payload || typeof payload.additionalDirections !== 'string' || payload.additionalDirections.trim().length === 0) {
+    isFormValid = false;
+    errors.additionalDirections = 'Please enter a valid street.';
+    errors.additionalDirectionsInvalid = true;
+  }
+
+  //Mobile Number
+  if (!payload || typeof payload.mobileNumber !== 'string' || payload.mobileNumber.trim().length === 0) {
+    isFormValid = false;
+    errors.mobileNumber = 'Please enter a valid street.';
+    errors.mobileNumberInvalid = true;
+  }
 
   if (!isFormValid) {
     message = 'Check the form for errors.';
@@ -96,9 +138,8 @@ function validateLoginForm(payload) {
   };
 }
 
-//LEFT OFF HERE STUCK TRYING TO SUBMIT FORM
 
-
+//SIGN UP
 
 router.post('/signup', (req, res, next) => {
   const validationResult = validateSignupForm(req.body);
@@ -139,6 +180,9 @@ router.post('/signup', (req, res, next) => {
   })(req, res, next);
 });
 
+
+//LOGIN
+
 router.post('/login', (req, res, next) => {
   const validationResult = validateLoginForm(req.body);
   // console.log(validationResult);
@@ -177,6 +221,49 @@ router.post('/login', (req, res, next) => {
     });
   })(req, res, next);
 });
+
+
+
+//FACEBOOK AUTHENTICATION
+
+// router.post('/auth/facebook/fb', (req, res, next) => {
+//   // const validationResult = validateLoginForm(req.body);
+//   // console.log(validationResult);
+//   // console.log(req);
+//
+//   // if (!validationResult.success) {
+//     // return res.status(400).json({
+//     //   success: false,
+//     //   message: validationResult.message,
+//     //   errors: validationResult.errors
+//     // });
+//   // }
+//
+//
+//   return passport.authenticate('local-login', (err, token, userData) => {
+//     if (err) {
+//       if (err.name === 'IncorrectCredentialsError') {
+//         return res.status(400).json({
+//           success: false,
+//           message: err.message
+//         });
+//       }
+//
+//       return res.status(400).json({
+//         success: false,
+//         message: 'Could not process the form.'
+//       });
+//     }
+//
+//
+//     return res.json({
+//       success: true,
+//       message: 'You have successfully logged in!',
+//       token,
+//       user: userData
+//     });
+//   })(req, res, next);
+// });
 
 
 

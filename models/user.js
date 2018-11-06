@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
   name: String,
   lastName: String,
   mobileNumber: String,
-  address: {
+  address: [{
     addressName: String,
     addressType: String,
     street: String,
@@ -20,8 +20,8 @@ const UserSchema = new mongoose.Schema({
     additionalDirections: String,
     lat: String,
     long: String,
-    preferredAddress: String,
-  }
+    preferredAddress: Boolean,
+  }]
 });
 
 
