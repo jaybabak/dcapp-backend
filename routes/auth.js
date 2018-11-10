@@ -226,44 +226,43 @@ router.post('/login', (req, res, next) => {
 
 //FACEBOOK AUTHENTICATION
 
-// router.post('/auth/facebook/fb', (req, res, next) => {
-//   // const validationResult = validateLoginForm(req.body);
-//   // console.log(validationResult);
-//   // console.log(req);
+// router.get('/auth/facebook', passport.authenticate('facebook'));
+
+// router.post('/facebook/login', (req, res, next) => {
 //
-//   // if (!validationResult.success) {
-//     // return res.status(400).json({
-//     //   success: false,
-//     //   message: validationResult.message,
-//     //   errors: validationResult.errors
-//     // });
-//   // }
+//   console.log(req.body.token);
 //
+//   passport.authenticate('facebook-token'), function (req, res) {
+//     console.log(req);
+//     console.log(res);
+//     res.send(req.user? 200 : 401);
+//   }
 //
-//   return passport.authenticate('local-login', (err, token, userData) => {
-//     if (err) {
-//       if (err.name === 'IncorrectCredentialsError') {
-//         return res.status(400).json({
-//           success: false,
-//           message: err.message
-//         });
-//       }
+//   // return res.status(400).json({
+//   //   success: false,
+//   //   message: 'Could not process the form.'
+//   // });
 //
-//       return res.status(400).json({
-//         success: false,
-//         message: 'Could not process the form.'
-//       });
-//     }
-//
-//
-//     return res.json({
-//       success: true,
-//       message: 'You have successfully logged in!',
-//       token,
-//       user: userData
-//     });
-//   })(req, res, next);
 // });
+
+router.post('/facebook/login',
+  passport.authenticate('facebook-token', {session: false}),
+  function (req, res) {
+        // console.log(req);
+        // console.log(res);
+    // do something with req.user
+    // res.send(req.user? 200 : 401);
+    // console.log(req);
+    // console.log(res);
+
+    res.status(200).json({
+      success: true,
+      message: 'You have successfully logged in!',
+      user: req.user
+    });
+
+  }
+);
 
 
 

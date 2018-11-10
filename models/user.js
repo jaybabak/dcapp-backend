@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const findOrCreate = require('mongoose-findorcreate');
 
 // define the User model schema
 const UserSchema = new mongoose.Schema({
@@ -8,6 +9,10 @@ const UserSchema = new mongoose.Schema({
     index: { unique: true }
   },
   password: String,
+  facebook: {
+    token: String,
+    avatar: String,
+  },
   name: String,
   lastName: String,
   mobileNumber: String,
@@ -60,6 +65,18 @@ UserSchema.pre('save', function saveHook(next) {
     });
   });
 });
+
+
+/**
+ * Find the facebook id if it exists in database if not create the user.
+ *
+ * @param {string} profile
+ * @returns {object} callback
+ */
+
+
+
+
 
 
 module.exports = mongoose.model('User', UserSchema);

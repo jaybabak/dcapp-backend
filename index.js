@@ -19,8 +19,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // load passport strategies
 const localSignupStrategy = require('./passport/local-signup');
 const localLoginStrategy = require('./passport/local-login');
+const FacebookTokenStrategy = require('./passport/facebook-login');
+
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
+passport.use('facebook-token', FacebookTokenStrategy);
 
 
 // routes
@@ -38,8 +41,8 @@ app.get('/users', function(req, res) {
 
     if (err) return console.error(err);
 
-    console.info("Returning all items:\n");
-    console.info(docs);
+    // console.info("Returning all items:\n");
+    // console.info(docs);
 
     var results = [];
     results = docs;
