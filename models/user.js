@@ -26,7 +26,9 @@ const UserSchema = new mongoose.Schema({
     lat: String,
     long: String,
     preferredAddress: Boolean,
-  }]
+  }],
+  role: String,
+  type: String
 });
 
 

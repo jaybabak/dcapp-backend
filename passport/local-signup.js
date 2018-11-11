@@ -28,7 +28,9 @@ module.exports = new PassportLocalStrategy({
         long: req.body.long.trim(),
         preferredAddress: req.body.preferredAddress.trim()
       }
-    ]
+    ],
+    role: String,
+    type: String
   };
 
   const newUser = new User(userData);

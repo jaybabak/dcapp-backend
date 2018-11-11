@@ -54,7 +54,9 @@ module.exports = new FacebookTokenStrategy({
               long: 'test',
               preferredAddress: true
             }
-          ]
+          ],
+          role: String,
+          type: String
         };
 
         const newUser = new User(userData);

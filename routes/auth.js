@@ -22,6 +22,7 @@ function validateSignupForm(payload) {
     isFormValid = false;
     errors.email = 'Please provide a correct email address.';
     errors.emailInvalid = true;
+    errors.step1Valid = false;
   }
 
   //Password
@@ -29,6 +30,7 @@ function validateSignupForm(payload) {
     isFormValid = false;
     errors.password = 'Password must have at least 8 characters.';
     errors.passwordInvalid = true;
+    errors.step1Valid = false;
   }
 
   //Name
@@ -36,6 +38,7 @@ function validateSignupForm(payload) {
     isFormValid = false;
     errors.name = 'Please provide your name.';
     errors.nameInvalid = true;
+    errors.step1Valid = false;
   }
 
   // Last Name
@@ -43,6 +46,7 @@ function validateSignupForm(payload) {
     isFormValid = false;
     errors.lastName = 'Please provide a last name.';
     errors.lastNameInvalid = true;
+    errors.step1Valid = false;
   }
 
   //Address name
