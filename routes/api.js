@@ -4,6 +4,7 @@ const User = mongoose.model('User');
 const passport = require('passport');
 const router = new express.Router();
 
+const addStore = require('../actions/addStore.js');
 
 router.post('/dashboard',
   passport.authenticate('facebook-token', {session: false}),
@@ -34,10 +35,20 @@ router.post('/add/store',
         // console.log(req);
         // console.log(res);
 
+    // console.log(req);
+    const storeValidationResults = addStore(req);
+    console.log(storeValidationResults);
+
+    // res.status(200).json({
+    //   success: true,
+    //   message: 'Route: /add/storasdfasdfe',
+    //   user: req.user
+    // });
     res.status(200).json({
       success: true,
-      message: 'You have successfully logged in!',
-      user: req.user
+      message: 'Route: /add/storasdfasdfe',
+      user: req.user,
+      errors: storeValidationResults
     });
 
   }

@@ -7,13 +7,17 @@ const StoreSchema = new mongoose.Schema({
   uid: { type: Schema.Types.ObjectId, required: true },
   name: String,
   description: String,
-  address: String,
-  address2: String,
   serviceFee: Number,
   phoneNumber: String,
   businessEmail: {
     type: String,
     index: { unique: true }
+  },
+  address: {
+    address: String,
+    address2: String,
+    lat: String,
+    long: String,
   },
   minimumOrder: Number,
   businessHours: {

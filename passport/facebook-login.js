@@ -16,9 +16,9 @@ module.exports = new FacebookTokenStrategy({
       // console.log(profile.emails[0].value);
       // console.log(accessToken);
       // console.log('!!!!!---------------Pa');
-      console.log('---------------------------');
-      console.log(user);
-      console.log('---------------------------');
+      // console.log('---------------------------');
+      // console.log(user);
+      // console.log('---------------------------');
 
       if (err) {
 
@@ -71,9 +71,6 @@ module.exports = new FacebookTokenStrategy({
 
 
       }
-
-      console.log('----------------USER FOUND');
-      console.log(user);
 
       return cb(err, user);
     });
