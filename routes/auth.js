@@ -256,7 +256,7 @@ router.post('/facebook/login',
         // console.log(res);
     // do something with req.user
     // res.send(req.user? 200 : 401);
-    // console.log(req);
+    console.log(req);
     // console.log(res);
 
     res.status(200).json({
