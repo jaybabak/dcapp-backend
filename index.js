@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const db = require('./models/index')
 db.connect(); //make connection to Database
 const User = mongoose.model('User');
+const Store = mongoose.model('Store');
 
 //AUTHENTICATION
 app.use(passport.initialize());
@@ -38,6 +39,23 @@ app.use('/api', apiRoutes);
 app.get('/users', function(req, res) {
 
   User.find({}, function(err, docs){
+
+    if (err) return console.error(err);
+
+    // console.info("Returning all items:\n");
+    // console.info(docs);
+
+    var results = [];
+    results = docs;
+
+    res.json(results);
+  });
+
+});
+
+app.get('/stores', function(req, res) {
+
+  Store.find({}, function(err, docs){
 
     if (err) return console.error(err);
 

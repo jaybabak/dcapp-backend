@@ -56,42 +56,15 @@ const StoreSchema = new mongoose.Schema({
 
 
 /**
- * Compare the passed password with the value in the database. A model method.
- *
- * @param {string} password
- * @returns {object} callback
- */
-StoreSchema.methods.comparePassword = function comparePassword(password, callback) {
-  // bcrypt.compare(password, this.password, callback);
-};
-
-
-/**
  * The pre-save hook method.
  */
 StoreSchema.pre('save', function saveHook(next) {
   const user = this;
+  // console.log(this);
+  // console.log('----------Store Was Saved');
 
-  console.log(this);
-  console.log('----------Store Was Saved');
-  //
-  //
-  // // proceed further only if the password is modified or the user is new
-  // if (!user.isModified('password')) return next();
-  //
-  //
-  // return bcrypt.genSalt((saltError, salt) => {
-  //   if (saltError) { return next(saltError); }
-  //
-  //   return bcrypt.hash(user.password, salt, (hashError, hash) => {
-  //     if (hashError) { return next(hashError); }
-  //
-  //     // replace a password string with hash value
-  //     user.password = hash;
-  //
-  //     return next();
-  //   });
-  // });
+  return next();
+
 });
 
 
@@ -102,4 +75,4 @@ StoreSchema.pre('save', function saveHook(next) {
  * @returns {object} callback
  */
 
-module.exports = mongoose.model('Stores', StoreSchema);
+module.exports = mongoose.model('Store', StoreSchema);

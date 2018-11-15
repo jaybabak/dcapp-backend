@@ -1,34 +1,66 @@
+
 const validator = require('validator');
+const Store = require('mongoose').model('Store');
 
 
 
-module.exports = function addStore(req) {
+module.exports = function addStore(req, res) {
 
 
-    const results = validateLoginForm(req);
+
+
+
+
+    const results = validateLoginForm(req, res);
+
+    // console.log(results);
 
     return results;
 
 };
 
-function validateLoginForm(payload) {
+function validateLoginForm(payload, res) {
 
 
   const storeObject = payload.body;
   // console.log(storeObject);
 
   // console.log(validator.isEmail(storeObject.businessEmail));
-  console.log(validator.isInt(storeObject.phoneNumber));
+  // console.log(validator.isInt(storeObject.phoneNumber));
 
   const errors = {};
   let isFormValid = true;
   let message = '';
 
   //Name
-  if (!storeObject || typeof storeObject.name !== 'string' || !validator.isAlphanumeric(storeObject.name)) {
+  if (!storeObject || typeof storeObject.name !== 'string') {
     isFormValid = false;
     errors.name = 'Please provide a valid name';
     errors.nameInvalid = true;
+    errors.step1Valid = false;
+  }
+
+  //Description
+  if (!storeObject || typeof storeObject.description !== 'string') {
+    isFormValid = false;
+    errors.description = 'Please provide a valid description';
+    errors.descriptionInvalid = true;
+    errors.step1Valid = false;
+  }
+
+  //Address
+  if (!storeObject || typeof storeObject.address !== 'string') {
+    isFormValid = false;
+    errors.address = 'Please provide a valid address';
+    errors.addressInvalid = true;
+    errors.step1Valid = false;
+  }
+
+  //Address 2
+  if (!storeObject || typeof storeObject.address2 !== 'string') {
+    isFormValid = false;
+    errors.address2 = 'Please provide a valid address';
+    errors.address2Invalid = true;
     errors.step1Valid = false;
   }
 
@@ -56,7 +88,7 @@ function validateLoginForm(payload) {
     errors.step1Valid = false;
   }
 
-  //Service Fee
+  //Minimum Order
   if (!storeObject || typeof storeObject.minimumOrder !== 'string' || !validator.isInt(storeObject.minimumOrder)) {
     isFormValid = false;
     errors.minimumOrder = 'Please enter only numbers, no characters.';
@@ -65,19 +97,68 @@ function validateLoginForm(payload) {
   }
 
 
-  //
-  // if (!payload || typeof payload.password !== 'string' || payload.password.trim().length === 0) {
-  //   isFormValid = false;
-  //   errors.password = 'Please provide your password.';
-  // }
-  //
-  // if (!isFormValid) {
-  //   message = 'Check the form for errors.';
-  // }
+    // console.log(payload.user[0]._id);
 
-  return {
-    success: isFormValid,
-    message,
-    errors
-  };
+    nodeObject = {
+      uid: payload.user[0]._id,
+      name: storeObject.name,
+      description: storeObject.description,
+      serviceFee: storeObject.serviceFee,
+      phoneNumber: storeObject.phoneNumber,
+      businessEmail: storeObject.businessEmail,
+      address: {
+        address: storeObject.address,
+        address2: storeObject.address2,
+        lat: '75',
+        long: '74',
+      },
+      minimumOrder: storeObject.minimumOrder,
+      businessHours: {
+        monday: {
+          open: '9AM',
+          close: '10PM',
+        },
+        tuesday: {
+          open: '9AM',
+          close: '10PM',
+        },
+        wednesday: {
+          open: '9AM',
+          close: '10PM',
+        },
+        thursday: {
+          open: '9AM',
+          close: '10PM',
+        },
+        friday: {
+          open: '9AM',
+          close: '10PM',
+        },
+        saturday: {
+          open: '9AM',
+          close: '10PM',
+        },
+        sunday: {
+          open: '9AM',
+          close: '10PM',
+        },
+      },
+      status: false,
+    };
+
+    // console.log(nodeObject);
+
+    // console.log('--------\nIS THIS FORM VALID BEFORE RETURN STATEMENT: ' + isFormValid);
+
+
+    return {
+      success: isFormValid,
+      message,
+      errors,
+      nodeObject
+    };
+
+
+
+
 }
