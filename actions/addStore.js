@@ -33,7 +33,7 @@ function validateLoginForm(payload, res) {
   let message = '';
 
   //Name
-  if (!storeObject || typeof storeObject.name !== 'string') {
+  if (!storeObject || typeof storeObject.name !== 'string' || validator.isEmpty(storeObject.name)) {
     isFormValid = false;
     errors.name = 'Please provide a valid name';
     errors.nameInvalid = true;
@@ -41,7 +41,7 @@ function validateLoginForm(payload, res) {
   }
 
   //Description
-  if (!storeObject || typeof storeObject.description !== 'string') {
+  if (!storeObject || typeof storeObject.description !== 'string' || validator.isEmpty(storeObject.description)) {
     isFormValid = false;
     errors.description = 'Please provide a valid description';
     errors.descriptionInvalid = true;
@@ -49,7 +49,7 @@ function validateLoginForm(payload, res) {
   }
 
   //Address
-  if (!storeObject || typeof storeObject.address !== 'string') {
+  if (!storeObject || typeof storeObject.address !== 'string' || validator.isEmpty(storeObject.address)) {
     isFormValid = false;
     errors.address = 'Please provide a valid address';
     errors.addressInvalid = true;
@@ -57,7 +57,7 @@ function validateLoginForm(payload, res) {
   }
 
   //Address 2
-  if (!storeObject || typeof storeObject.address2 !== 'string') {
+  if (!storeObject || typeof storeObject.address2 !== 'string' || validator.isEmpty(storeObject.address2)) {
     isFormValid = false;
     errors.address2 = 'Please provide a valid address';
     errors.address2Invalid = true;

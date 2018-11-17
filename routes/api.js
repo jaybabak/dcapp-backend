@@ -74,8 +74,8 @@ router.post('/add/store',
             success: isFormValid,
             message: 'Check the form for errors. That email is already taken',
             errors: {
-              email: 'This email is already taken.',
-              emailInvalid: true
+              businessEmail: 'This email is already taken.',
+              businessEmailInvalid: true
             }
           });
         }
