@@ -109,8 +109,8 @@ function validateLoginForm(payload, res) {
       address: {
         address: storeObject.address,
         address2: storeObject.address2,
-        lat: '75',
-        long: '74',
+        lat: '25.269335',
+        long: '51.512963',
       },
       minimumOrder: storeObject.minimumOrder,
       businessHours: {

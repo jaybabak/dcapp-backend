@@ -11,12 +11,6 @@ const saveStore = require('../actions/saveStore.js');
 router.post('/dashboard',
   passport.authenticate('facebook-token', {session: false}),
   function (req, res) {
-        // console.log(req);
-        // console.log(res);
-        // do something with req.user
-        // res.send(req.user? 200 : 401);
-        // console.log(req);
-        // console.log(res);
 
     res.status(200).json({
       success: true,
@@ -48,12 +42,7 @@ router.post('/add/store',
 
     }
 
-
-
-
     var storeObjectFromReq = storeValidationResults.nodeObject;
-
-    // const saveResults = saveStore(storeObjectFromReq);
 
     const errors = {};
     let isFormValid = true;
