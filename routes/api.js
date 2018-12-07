@@ -6,7 +6,7 @@ const passport = require('passport');
 const router = new express.Router();
 
 const addStore = require('../actions/addStore.js');
-const saveStore = require('../actions/saveStore.js');
+const getPendingStores = require('../actions/getPendingStores.js');
 
 router.post('/dashboard',
   passport.authenticate('facebook-token', {session: false}),
@@ -79,6 +79,22 @@ router.post('/add/store',
 
   }
 );
+
+router.post('/stores/pending',
+  passport.authenticate('facebook-token', {session: false}),
+  function (req, res) {
+
+    getPendingStores(req, res);
+
+    // res.status(200).json({
+    //   success: true,
+    //   message: 'You have accessed the Pending Stores page!',
+    //   user: req.user
+    // });
+
+  }
+);
+
 
 
 module.exports = router;
