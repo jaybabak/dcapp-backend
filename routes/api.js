@@ -6,6 +6,7 @@ const passport = require('passport');
 const router = new express.Router();
 
 const addStore = require('../actions/addStore.js');
+const editStore = require('../actions/editStore.js');
 const getPendingStores = require('../actions/getPendingStores.js');
 
 router.post('/dashboard',
@@ -76,6 +77,72 @@ router.post('/add/store',
         });
       }
     });
+
+  }
+);
+
+router.post('/edit/store',
+  passport.authenticate('facebook-token', {session: false}),
+  function (req, res) {
+
+    const storeValidationResults = editStore(req, res);
+    console.log(storeValidationResults);
+
+    if(!storeValidationResults.success){
+
+      return res.status(200).json({
+        success: storeValidationResults.success,
+        message: storeValidationResults.message,
+        user: req.user,
+        errors: storeValidationResults.errors,
+      });
+
+
+    }
+
+    var storeObjectFromReq = storeValidationResults.nodeObject;
+    //
+    const errors = {};
+    let isFormValid = true;
+    let message = 'Store updated successfully!';
+
+    return res.status(200).json({
+      success: storeValidationResults.success,
+      message: storeValidationResults.message,
+      user: req.user,
+      errors: storeValidationResults.errors,
+    });
+
+
+
+    // let storeObject = new Store(storeObjectFromReq);
+
+    // storeObject.save(function(err) {
+    //   if (err) {
+    //     if (err.name === 'MongoError' && err.code === 11000) {
+    //       console.log('--------------------------------');
+    //       console.log(err);
+    //       console.log('--------------------------------');
+    //
+    //       isFormValid = false;
+    //
+    //       return res.status(409).json({
+    //         success: isFormValid,
+    //         message: 'Check the form for errors. That email is already taken',
+    //         errors: {
+    //           businessEmail: 'This email is already taken.',
+    //           businessEmailInvalid: true
+    //         }
+    //       });
+    //     }
+    //
+    //   }else{
+    //     return res.status(200).json({
+    //       success: true,
+    //       message: 'You have successfully signed up! Pending status at the moment.'
+    //     });
+    //   }
+    // });
 
   }
 );

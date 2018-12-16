@@ -12,9 +12,6 @@ module.exports = function getPendingStores(req, res) {
       return console.error(err);
     }
 
-    // console.info("Returning all items:\n");
-    // console.info(docs);
-
     var results = [];
     results = docs;
 
@@ -26,7 +23,6 @@ module.exports = function getPendingStores(req, res) {
         data: null
       });
 
-
     }else{
 
       res.status(200).json({
@@ -37,11 +33,6 @@ module.exports = function getPendingStores(req, res) {
       });
 
     }
-
-
-
-    console.log(docs.length);
-
   });
 
   // res.status(200).json({
